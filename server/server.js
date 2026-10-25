@@ -6,16 +6,24 @@ const { Server } = require("socket.io");
 const app = express();
 const server = http.createServer(app);
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://neon-heist-client.onrender.com"
+  ],
+  methods: ["GET", "POST"]
+}));
 
 const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:5173",
       "http://localhost:5174",
+      "https://neon-heist-client.onrender.com"
     ],
-    methods: ["GET", "POST"],
-  },
+    methods: ["GET", "POST"]
+  }
 });
 
 // Store all active rooms
