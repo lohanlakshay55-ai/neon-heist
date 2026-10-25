@@ -762,6 +762,24 @@ setTimeout(() => {
       (player) => player.id !== socket.id
     );
 
+    // Remove disconnected player's rematch readiness
+if (room.rematchReady) {
+  delete room.rematchReady[socket.id];
+}
+
+// Remove disconnected player's temporary effects
+if (room.speedUntil) {
+  delete room.speedUntil[socket.id];
+}
+
+if (room.doubleUntil) {
+  delete room.doubleUntil[socket.id];
+}
+
+if (room.shieldUntil) {
+  delete room.shieldUntil[socket.id];
+}
+
 
     // If the host left, make the next player host
     if (room.hostId === socket.id) {
